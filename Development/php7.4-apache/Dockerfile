@@ -1,4 +1,4 @@
-# Set the base image for subsequent instructions
+# Set the base image for subsequent instructions 
 FROM php:7.4-apache
 # Update packages
 RUN apt-get -y update --fix-missing --no-install-recommends
