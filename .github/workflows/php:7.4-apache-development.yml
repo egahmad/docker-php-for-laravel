@@ -30,7 +30,7 @@ jobs:
           context: 'Development/php7.4-apache'
           file: ./Dockerfile 
           push: true
-          tags: user/app:latest
+          tags: egahmad/php7.4-apache-development.yml:latest
           #build-args: |
           #  arg1=value1
           #  arg2=value2
