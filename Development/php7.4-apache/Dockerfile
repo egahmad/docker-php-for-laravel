@@ -8,7 +8,7 @@ RUN apt-get -y upgrade
 RUN apt-get -yq install apt-utils nano wget dialog
 
 # Install PHP and composer dependencies
-RUN apt-get install -qq git curl sudo zip unzip libzip-dev libjpeg-dev libpng-dev libfreetype6-dev libbz2-dev libc-client-dev libkrb5-dev
+RUN apt-get install -qq git sudo zip unzip libzip-dev libjpeg-dev libpng-dev libfreetype6-dev libbz2-dev libc-client-dev libkrb5-dev
 
 # Install xdebug
 RUN pecl install xdebug && docker-php-ext-enable xdebug
@@ -37,15 +37,13 @@ RUN apt-get -y install libonig-dev
 # Install needed extensions
 # Here you can install any other extension that you need during the test and deployment process
 RUN apt-get update \
- && apt-get install -y git zlib1g-dev \
- && docker-php-ext-install mysqli pdo pdo_mysql && docker-php-ext-enable pdo_mysql
+ && apt-get install -y zlib1g-dev \
+ && docker-php-ext-install mysqli pdo_mysql && docker-php-ext-enable pdo_mysql
 
 #Enable PDO extenstion from php.ini, we areleady in development mode
 RUN cp /usr/local/etc/php/php.ini-development /usr/local/etc/php/php.ini
 RUN sed -i 's/;extension=pdo_mysql/extension=pdo_mysql/g' /usr/local/etc/php/php.ini
 
-
-#RUN docker-php-ext-install pdo_sqlite
 RUN docker-php-ext-install mysqli
 
 RUN docker-php-ext-install tokenizer
@@ -58,7 +56,7 @@ RUN apt-get install -y libjpeg62-turbo-dev
 RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
 RUN docker-php-ext-install -j$(nproc) gd
 
-RUN docker-php-ext-install mbstring zip && rm -r /var/lib/apt/lists/*
+RUN docker-php-ext-install zip && rm -r /var/lib/apt/lists/*
 RUN docker-php-ext-configure imap --with-kerberos --with-imap-ssl \
     && docker-php-ext-install imap
 
@@ -67,7 +65,6 @@ RUN a2enmod rewrite headers
 
 RUN docker-php-ext-install \
     bz2 \
-    iconv \
     bcmath \
     opcache \
     calendar
