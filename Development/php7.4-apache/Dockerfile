@@ -1,8 +1,12 @@
 # Set the base image for subsequent instructions
 FROM php:7.4-apache
+
 # Update packages
 RUN apt-get -y update --fix-missing --no-install-recommends
 RUN apt-get -y upgrade
+
+# Add Easy installation of PHP extensions in official PHP Docker images
+ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
 
 # Install useful tools
 RUN apt-get -yq install apt-utils nano wget dialog
@@ -53,11 +57,9 @@ RUN docker-php-ext-install -j$(nproc) intl
 RUN docker-php-ext-install gettext
 
 RUN apt-get install -y libjpeg62-turbo-dev
-RUN docker-php-ext-configure gd --with-gd --with-webp-dir --with-jpeg-dir \
-    --with-png-dir --with-zlib-dir --with-xpm-dir --with-freetype-dir \
-    --enable-gd-native-ttf
 
-RUN docker-php-ext-install gd
+RUN chmod +x /usr/local/bin/install-php-extensions && sync && \
+    install-php-extensions gd
 
 RUN docker-php-ext-install zip && rm -r /var/lib/apt/lists/*
 RUN docker-php-ext-configure imap --with-kerberos --with-imap-ssl \
