@@ -3,8 +3,8 @@ name: ci
 on:
   push:
     branches: main
-    paths:
-      - 'Development/php7.4-apache/Dockerfile'
+    #paths:
+    #  - 'Development/php7.4-apache/Dockerfile'
 
 jobs:
   main:
@@ -20,8 +20,8 @@ jobs:
         name: Login to DockerHub
         uses: docker/login-action@v1 
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          username: egahmad
+          password: 7682894b-eb7e-4fb6-a951-2ec2803346d8
       -
         name: Build and push
         id: docker_build
