@@ -5,7 +5,8 @@ FROM php:7.4-apache
 RUN apt-get -y update --fix-missing --no-install-recommends
 RUN apt-get -y upgrade
 
-# Add Easy installation of PHP extensions in official PHP Docker images
+# Add Easy installation of PHP extensions in official PHP Docker images - The fucking problems solver for me
+# https://github.com/mlocati/docker-php-extension-installer
 ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
 
 # Install useful tools
@@ -21,7 +22,7 @@ RUN pecl install xdebug && docker-php-ext-enable xdebug
 RUN apt-get -y clean all && apt-get -y update && apt-get -y dist-upgrade
 
 # 1. development packages
-RUN apt-get install -y  --fix-missing \
+RUN apt-get install -y nodejs --fix-missing \
     libicu-dev \
     libmcrypt-dev \
     libreadline-dev \
@@ -72,14 +73,12 @@ RUN docker-php-ext-install \
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
+
 # show that both Composer and PHP run as expected
 RUN composer --version && php -v
-#COPY . /var/www/html
-
-WORKDIR /var/www/html
 
 RUN useradd -G www-data,root -u 1000 -d /home/devuser devuser
 
 WORKDIR /var/www/html/
 
-#FROM egahmad/phpforlaravel AS Builder
+RUN apt-get clean
