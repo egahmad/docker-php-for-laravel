@@ -32,9 +32,9 @@ RUN apt-get install -y nodejs --fix-missing \
 RUN apt-get clean
 
 # 2. apache configs + document root
-ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
-RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf
-RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+#ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
+RUN sed -ri -e 's!/var/www/html!/var/www/html/public/!g' /etc/apache2/sites-available/*.conf
+RUN sed -ri -e 's!/var/www/!/var/www/html/public/!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
 #Fixing "Package requirements (oniguruma) were not met" for mbstring
 RUN apt-get -y install libonig-dev
