@@ -3,8 +3,8 @@ name: ci
 on:
   push:
     branches: main
-    #paths:
-    #  - 'Development/php7.4-apache/Dockerfile'
+    paths:
+      - 'Development/php7.4-apache/Dockerfile'
 
 jobs:
   main:
@@ -30,7 +30,7 @@ jobs:
           #context: 'Development/php7.4-apache'
           file: ./Development/php7.4-apache/Dockerfile
           push: true
-          tags: egahmad/php7.4-apache-development.yml:latest
+          tags: egahmad/php7.4-laravel-apache-development:latest
           #build-args: |
           #  arg1=value1
           #  arg2=value2
