@@ -27,8 +27,8 @@ jobs:
         id: docker_build
         uses: docker/build-push-action@v2
         with:
-          context: 'Development/php7.4-apache/'
-          file: ./Dockerfile 
+          #context: './Development/php7.4-apache/'
+          file: ./Development/php7.4-apache/Dockerfile
           push: true
           tags: egahmad/php7.4-apache-development.yml:latest
           #build-args: |
