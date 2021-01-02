@@ -59,11 +59,7 @@ RUN docker-php-ext-install gettext
 RUN apt-get install -y libjpeg62-turbo-dev
 
 RUN chmod +x /usr/local/bin/install-php-extensions && sync && \
-    install-php-extensions gd
-
-RUN docker-php-ext-install zip && rm -r /var/lib/apt/lists/*
-RUN docker-php-ext-configure imap --with-kerberos --with-imap-ssl \
-    && docker-php-ext-install imap
+    install-php-extensions gd zip imap
 
 # Enable apache modules
 RUN a2enmod rewrite headers
