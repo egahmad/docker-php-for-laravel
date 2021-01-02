@@ -11,8 +11,7 @@ RUN apt-get -yq install apt-utils nano wget dialog
 RUN apt-get install -qq git curl sudo zip unzip libzip-dev libjpeg-dev libpng-dev libfreetype6-dev libbz2-dev libc-client-dev libkrb5-dev
 
 # Install xdebug
-RUN pecl install xdebug-2.6.0
-RUN docker-php-ext-enable xdebug
+RUN pecl install xdebug && docker-php-ext-enable xdebug
 
 # Clear out the local repository of retrieved package files
 RUN apt-get -y clean all && apt-get -y update && apt-get -y dist-upgrade
