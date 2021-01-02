@@ -82,5 +82,3 @@ RUN composer --version && php -v
 WORKDIR /var/www/html
 
 RUN useradd -G www-data,root -u 1000 -d /home/devuser devuser
-
-WORKDIR /var/www/html/
