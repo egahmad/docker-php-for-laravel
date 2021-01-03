@@ -13,7 +13,7 @@ ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/do
 RUN apt-get -yq install apt-utils nano wget dialog
 
 # Install PHP and composer dependencies
-RUN apt-get install -qq git sudo zip unzip libzip-dev libjpeg-dev libpng-dev libfreetype6-dev libbz2-dev libc-client-dev libkrb5-dev
+RUN apt-get install -qq git sudo zip unzip cron libzip-dev libjpeg-dev libpng-dev libfreetype6-dev libbz2-dev libc-client-dev libkrb5-dev
 
 # Install xdebug
 RUN pecl install xdebug && docker-php-ext-enable xdebug
