@@ -13,7 +13,7 @@ ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/do
 RUN apt-get -yq install apt-utils nano wget dialog cron
 
 # Install PHP and composer dependencies
-RUN apt-get install -qq git sudo zip unzip  libzip-dev libjpeg-dev libpng-dev libfreetype6-dev libbz2-dev libc-client-dev libkrb5-dev
+RUN apt-get install -qq git sudo zip unzip libzip-dev libjpeg-dev libpng-dev libfreetype6-dev libbz2-dev libc-client-dev libkrb5-dev
 
 # Install xdebug
 RUN pecl install xdebug && docker-php-ext-enable xdebug
@@ -63,6 +63,7 @@ RUN chmod +x /usr/local/bin/install-php-extensions && sync && \
     install-php-extensions gd zip imap
 
 # Enable apache modules
+RUN a2enmod ssl
 RUN a2enmod rewrite headers
 
 RUN docker-php-ext-install \
@@ -70,6 +71,8 @@ RUN docker-php-ext-install \
     bcmath \
     opcache \
     calendar
+
+RUN service apache2 restart
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
