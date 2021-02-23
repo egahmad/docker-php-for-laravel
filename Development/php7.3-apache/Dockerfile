@@ -113,6 +113,6 @@ RUN apt-get update \
 RUN pecl install xdebug && docker-php-ext-enable xdebug
 
 # Install Composer
-COPY --from=composer:latest /usr/bin/composer /usr/local/bin/composer
+COPY --from=composer:1.10.20 /usr/bin/composer /usr/local/bin/composer
 
 RUN apt-get clean
