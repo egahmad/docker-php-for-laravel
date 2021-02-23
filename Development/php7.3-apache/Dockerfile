@@ -32,7 +32,7 @@ RUN apt-get update && apt-get install -y \
   zip \
   procps
 
-RUN docker-php-ext-configure gd --with-freetype --with-jpeg
+#RUN docker-php-ext-configure gd --with-freetype --with-jpeg
 
 RUN docker-php-ext-install \
   bcmath \
