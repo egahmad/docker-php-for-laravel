@@ -109,6 +109,9 @@ RUN apt-get update \
     && docker-php-ext-install zip \
     && docker-php-ext-configure imap --with-kerberos --with-imap-ssl && docker-php-ext-install imap
 
+RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
+RUN docker-php-ext-install -j$(nproc) gd
+
 # Install xdebug
 RUN pecl install xdebug && docker-php-ext-enable xdebug
 
