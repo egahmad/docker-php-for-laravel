@@ -4,7 +4,7 @@ on:
   push:
     branches: main
     paths:
-      - 'Development/php7.3-apache/Dockerfile'
+      - 'Development/php7.2-apache/Dockerfile'
 
 jobs:
   main:
