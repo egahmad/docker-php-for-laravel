@@ -1,5 +1,5 @@
 # Set the base image for subsequent instructions
-FROM php:7.2-apache
+FROM php:7.3-apache
 
 # Update packages
 RUN apt-get -y update --fix-missing --no-install-recommends
@@ -111,11 +111,5 @@ RUN apt-get update \
 
 RUN docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
 RUN docker-php-ext-install -j$(nproc) gd
-
-# Install xdebug
-RUN pecl install xdebug && docker-php-ext-enable xdebug
-
-# Install Composer
-COPY --from=composer:1.10.20 /usr/bin/composer /usr/local/bin/composer
 
 RUN apt-get clean
